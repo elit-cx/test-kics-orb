@@ -5,18 +5,22 @@ orbs:
   welcome: circleci/welcome-orb@0.4.1
   kics: checkmarx-kics/kics-scan@1.0.1
 # Orchestrate or schedule a set of jobs
+jobs:
+  display-results:
+     docker:
+      - image: cimg/<language>:<version TAG>
+     steps:
+       - run:
+           name: display results file
+           command: |
+             cat results.json
 workflows:
   # Name the workflow "welcome"
-  welcome:
+  scan-IaC:
     # Run the welcome/run job in its own container
     jobs:
       - kics/kics_scan:
           path: .
           output_formats: sarif
           output_path: results.sarif
-      - display results:
-        steps:
-          - run:
-            name: display results
-            command: |
-              cat results.json
+      - display-results
