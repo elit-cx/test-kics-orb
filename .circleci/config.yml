@@ -8,7 +8,7 @@ orbs:
 jobs:
   display-results:
      docker:
-      - image: cimg/<language>:<version TAG>
+      - image: cimg/base:2021.04
      steps:
        - run:
            name: display results file
@@ -24,3 +24,5 @@ workflows:
           output_formats: sarif
           output_path: results.sarif
       - display-results
+        requires:
+          - kics/kics_scan
