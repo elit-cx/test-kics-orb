@@ -14,7 +14,9 @@ workflows:
           path: .
           output_formats: sarif
           output_path: results.sarif
-      - run:
-          name: display results
-          command: |
-            cat results.json
+      - display results:
+        steps:
+          - run:
+            name: display results
+            command: |
+              cat results.json
