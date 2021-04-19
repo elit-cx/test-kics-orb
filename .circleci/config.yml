@@ -10,6 +10,7 @@ workflows:
   welcome:
     # Run the welcome/run job in its own container
     jobs:
-      - welcome/run
       - kics/kics_scan:
           path: .
+          output_formats: sarif
+          output_path: results.sarif
